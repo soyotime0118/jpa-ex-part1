@@ -30,4 +30,9 @@ public class OrderItem
     private int orderPrice;
 
     private int count;
+
+    public void order(Order order)
+    {
+        this.order = order;
+    }
 }

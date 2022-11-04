@@ -31,5 +31,15 @@ public class Category
             inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items = new ArrayList<>();
 
+    public void addChildCategory(Category child)
+    {
+        child.parent(this);
+        this.child.add(child);
+    }
+
+    private void parent(Category category)
+    {
+        this.parent = category;
+    }
 
 }

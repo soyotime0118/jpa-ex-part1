@@ -37,4 +37,24 @@ public class Order
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+
+    //연관관계 method
+    public void assignMember(Member member)
+    {
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addItem(OrderItem orderItem)
+    {
+        orderItem.order(this);
+        orderItems.add(orderItem);
+    }
+
+    public void delivery(Delivery delivery)
+    {
+        this.delivery = delivery;
+        delivery.order(this);
+    }
+
 }
