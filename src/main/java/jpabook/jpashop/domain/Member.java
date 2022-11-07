@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class Member
 {
     @Id
