@@ -1,5 +1,6 @@
 package jpabook.jpashop.service;
 
+import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import org.junit.jupiter.api.Assertions;
@@ -22,7 +23,7 @@ class MemberServiceTest
     @Test
     void 회원가입()
     {
-        Member member = Member.build("kim");
+        Member member = Member.build("kim", new Address("서울", "rudrl", "12323"));
 
         Long savedId = memberService.join(member);
 
@@ -32,13 +33,13 @@ class MemberServiceTest
     @Test
     void 회원가입_예외()
     {
-        Member member = Member.build("kim");
+        Member member = Member.build("kim", new Address("서울", "rudrl", "12323"));
 
         memberRepository.save(member);
 
         Assertions.assertThrows(IllegalStateException.class, () ->
         {
-            Member newMember = Member.build("kim");
+            Member newMember = Member.build("kim", new Address("서울", "rudrl", "12323"));
             memberService.join(newMember);
         });
     }

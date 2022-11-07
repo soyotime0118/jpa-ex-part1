@@ -26,14 +26,14 @@ public class Member
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
-    protected Member(String name)
+    protected Member(String name, Address address)
     {
         this.name = name;
-
+        this.address = address;
     }
 
-    public static Member build(String name)
+    public static Member build(String name, Address address)
     {
-        return new Member(name);
+        return new Member(name, address);
     }
 }
