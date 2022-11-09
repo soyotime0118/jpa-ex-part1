@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -75,6 +76,7 @@ class OrderServiceTest
 
 
     @Test
+    @Rollback(value = false)
     void 주문취소()
     {
         Member member = getMember();
@@ -86,10 +88,12 @@ class OrderServiceTest
 
         orderService.cancel(orderId);
 
-        Order expected = orderRepository.findById(orderId);
+//        Order expected = orderRepository.findById(orderId);
 
-        Assertions.assertEquals(OrderStatus.CANCEL, expected.getStatus());
+//        Assertions.assertEquals(OrderStatus.CANCEL, expected.getStatus());
         Assertions.assertEquals(10, book.getStockQuantity());
+        Assertions.assertEquals(1, member.getOrders().stream()
+                .filter(order -> order.getStatus() == OrderStatus.ORDER).count());
     }
 
 }

@@ -25,7 +25,7 @@ public class OrderService
     {
         Member member = memberRepository.findOne(memberId);
         Item item = itemRepository.findOne(itemId);
-        Delivery delivery = new Delivery();
+        Delivery delivery = Delivery.build(member.getAddress());
 
         OrderItem orderItem = OrderItem.create(item, item.getPrice(), count);
 

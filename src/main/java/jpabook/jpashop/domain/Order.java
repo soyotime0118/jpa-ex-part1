@@ -20,7 +20,7 @@ public class Order
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id"
             , foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
@@ -68,10 +68,13 @@ public class Order
     public static Order create(Member member, Delivery delivery, OrderItem... orderItems)
     {
         Order order = new Order(member, delivery, OrderStatus.ORDER, LocalDateTime.now());
+//        member.getOrders().add(order);
         for (OrderItem orderItem : orderItems)
         {
             order.addItem(orderItem);
         }
+        delivery.assign(order);
+
         return order;
     }
 
