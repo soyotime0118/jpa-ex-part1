@@ -28,7 +28,7 @@ class MemberRepositoryTest
     @Test
     void assignOrder()
     {
-        Address address = new Address("서울", "rudrl", "12323");
+        Address address = Address.builder().city("city").street("street").zipcode("zipcode").build();
         Delivery delivery = Delivery.build(address);
         Member member = Member.build("kim", address);
         em.persist(member);

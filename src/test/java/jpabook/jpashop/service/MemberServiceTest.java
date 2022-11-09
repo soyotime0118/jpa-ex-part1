@@ -23,7 +23,8 @@ class MemberServiceTest
     @Test
     void 회원가입()
     {
-        Member member = Member.build("kim", new Address("서울", "rudrl", "12323"));
+        Address address = Address.builder().city("city").street("street").zipcode("zipcode").build();
+        Member member = Member.build("kim", address);
 
         Long savedId = memberService.join(member);
 
@@ -33,13 +34,14 @@ class MemberServiceTest
     @Test
     void 회원가입_예외()
     {
-        Member member = Member.build("kim", new Address("서울", "rudrl", "12323"));
+        Address address = Address.builder().city("city").street("street").zipcode("zipcode").build();
+        Member member = Member.build("kim", address);
 
         memberRepository.save(member);
 
         Assertions.assertThrows(IllegalStateException.class, () ->
         {
-            Member newMember = Member.build("kim", new Address("서울", "rudrl", "12323"));
+            Member newMember = Member.build("kim", address);
             memberService.join(newMember);
         });
     }

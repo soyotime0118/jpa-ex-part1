@@ -37,7 +37,8 @@ class OrderServiceTest
 
     private static Member getMember()
     {
-        return Member.build("kim", new Address("서울", "rudrl", "12323"));
+        Address address = Address.builder().city("city").street("street").zipcode("zipcode").build();
+        return Member.build("kim", address);
     }
 
     @Test

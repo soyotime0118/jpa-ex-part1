@@ -26,7 +26,8 @@ class OrderRepositoryImplTest
     void assignOrder()
     {
         Delivery delivery = null;
-        Member member = Member.build("kim", new Address("서울", "rudrl", "12323"));
+        Address address = Address.builder().city("city").street("street").zipcode("zipcode").build();
+        Member member = Member.build("kim", address);
         Item item = null;
         OrderItem orderItem = OrderItem.create(item, 1000, 1);
         Order order = Order.create(member, delivery, orderItem);
