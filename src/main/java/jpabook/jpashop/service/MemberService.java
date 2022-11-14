@@ -1,5 +1,6 @@
 package jpabook.jpashop.service;
 
+import jpabook.jpashop.controller.MembersResponse;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,9 +37,21 @@ public class MemberService
     }
 
     @Transactional(readOnly = true)
-    public List<Member> findMembers()
+    public List<MembersResponse> findMembers()
     {
-        return memberRepository.findAll();
+        return memberRepository.findAll().stream()
+                .map(member ->
+                {
+                    //mason mapper 적용
+                    MembersResponse response = new MembersResponse();
+                    response.setId(member.getId());
+                    response.setName(member.getName());
+                    response.setCity(member.getAddress().getCity());
+                    response.setStreet(member.getAddress().getStreet());
+                    response.setZipcode(member.getAddress().getZipcode());
+                    return response;
+                })
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
