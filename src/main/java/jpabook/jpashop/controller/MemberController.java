@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/members")
 @RestController
@@ -19,13 +19,17 @@ public class MemberController
     private final MemberService memberService;
 
     @PostMapping("/new")
-    public ResponseEntity<Long> create(@RequestBody @Valid MemberForm form)
+    public ResponseEntity<Long> create(@RequestBody Map<String, String> parameters)
     {
 
-        //mason MemberFormDTO 변환
-        Address address = Address.builder().city(form.getCity()).street(form.getStreet()).zipcode(form.getZipcode()).build();
+        Address address = Address.builder()
+                .city(parameters.get("city"))
+                .street(parameters.get("street"))
+                .zipcode(parameters.get("zipcode"))
+                .build();
 
-        Member member = Member.build(form.getName(), address);
+        Member member = Member.build(
+                parameters.get("name"), address);
         return ResponseEntity.ok(memberService.join(member));
 
     }
