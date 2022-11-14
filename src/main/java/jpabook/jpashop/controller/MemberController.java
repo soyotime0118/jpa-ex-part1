@@ -22,8 +22,11 @@ public class MemberController
     public ResponseEntity<Long> create(@RequestBody @Valid MemberForm form)
     {
 
-        //mason MemberFormDTO 변환
-        Address address = Address.builder().city(form.getCity()).street(form.getStreet()).zipcode(form.getZipcode()).build();
+        Address address = Address.builder()
+                .city(form.getCity())
+                .street(form.getStreet())
+                .zipcode(form.getZipcode())
+                .build();
 
         Member member = Member.build(form.getName(), address);
         return ResponseEntity.ok(memberService.join(member));
