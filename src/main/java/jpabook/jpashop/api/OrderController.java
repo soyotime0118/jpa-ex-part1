@@ -1,4 +1,4 @@
-package jpabook.jpashop.controller;
+package jpabook.jpashop.api;
 
 import jpabook.jpashop.service.ItemService;
 import jpabook.jpashop.service.MemberService;

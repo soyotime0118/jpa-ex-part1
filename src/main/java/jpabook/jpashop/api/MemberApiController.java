@@ -1,4 +1,4 @@
-package jpabook.jpashop.controller;
+package jpabook.jpashop.api;
 
 
 import jpabook.jpashop.domain.Address;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/members")
 @RestController
 @RequiredArgsConstructor
-public class MemberController
+public class MemberApiController
 {
     private final MemberService memberService;
 

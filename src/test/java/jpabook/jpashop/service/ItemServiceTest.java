@@ -1,6 +1,6 @@
 package jpabook.jpashop.service;
 
-import jpabook.jpashop.controller.ItemModifyRequest;
+import jpabook.jpashop.api.ItemModifyRequest;
 import jpabook.jpashop.domain.item.Book;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

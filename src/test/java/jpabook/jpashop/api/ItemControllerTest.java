@@ -1,4 +1,4 @@
-package jpabook.jpashop.controller;
+package jpabook.jpashop.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jpabook.jpashop.exception.NotExistItemException;

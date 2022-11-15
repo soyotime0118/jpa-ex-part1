@@ -1,4 +1,4 @@
-package jpabook.jpashop.controller;
+package jpabook.jpashop.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jpabook.jpashop.repository.MemberRepository;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-class MemberControllerTest
+class MemberApiControllerTest
 {
 
     @Autowired

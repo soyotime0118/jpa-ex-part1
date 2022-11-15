@@ -1,7 +1,7 @@
 package jpabook.jpashop.service;
 
-import jpabook.jpashop.controller.BookCreateApiRequest;
-import jpabook.jpashop.controller.ItemModifyRequest;
+import jpabook.jpashop.api.BookCreateApiRequest;
+import jpabook.jpashop.api.ItemModifyRequest;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.exception.NotExistItemException;
