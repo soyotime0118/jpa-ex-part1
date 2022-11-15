@@ -4,12 +4,14 @@ import jpabook.jpashop.controller.BookCreateApiRequest;
 import jpabook.jpashop.controller.ItemModifyRequest;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.exception.NotExistItemException;
 import jpabook.jpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +41,10 @@ public class ItemService
     @Transactional
     public void modify(long itemId, ItemModifyRequest modifyRequest)
     {
-        Book book = (Book) itemRepository.findOne(itemId);
+        Book book = Optional.ofNullable(itemRepository.findOne(itemId))
+                .map(item -> (Book) item)
+                .orElseThrow(NotExistItemException::new);
+
         book.changeBook(modifyRequest.getAuthor(), modifyRequest.getIsbn());
         book.changeInfo(modifyRequest.getName(), modifyRequest.getStockQuantity(), modifyRequest.getPrice());
     }
