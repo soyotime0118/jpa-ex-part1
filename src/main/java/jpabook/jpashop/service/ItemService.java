@@ -1,6 +1,7 @@
 package jpabook.jpashop.service;
 
 import jpabook.jpashop.controller.BookCreateApiRequest;
+import jpabook.jpashop.controller.ItemModifyRequest;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
@@ -33,5 +34,13 @@ public class ItemService
     public Item findOne(Long itemId)
     {
         return itemRepository.findOne(itemId);
+    }
+
+    @Transactional
+    public void modify(long itemId, ItemModifyRequest modifyRequest)
+    {
+        Book book = (Book) itemRepository.findOne(itemId);
+        book.changeBook(modifyRequest.getAuthor(), modifyRequest.getIsbn());
+        book.changeInfo(modifyRequest.getName(), modifyRequest.getStockQuantity(), modifyRequest.getPrice());
     }
 }

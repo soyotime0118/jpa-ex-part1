@@ -27,4 +27,10 @@ public class Book extends Item
     {
         return new Book(name, price, quantity, author, isbn);
     }
+
+    public void changeBook(String author, String isbn)
+    {
+        this.author = author;
+        this.isbn = isbn;
+    }
 }

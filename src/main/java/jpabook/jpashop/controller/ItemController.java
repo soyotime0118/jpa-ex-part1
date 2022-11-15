@@ -2,9 +2,7 @@ package jpabook.jpashop.controller;
 
 import jpabook.jpashop.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,4 +31,13 @@ public class ItemController
                 })
                 .collect(Collectors.toList());
     }
+
+    @PutMapping("/items/{itemId}/edit")
+    public void updateItem(
+            @PathVariable("itemId") Long itemId,
+            @RequestBody ItemModifyRequest modifyRequest)
+    {
+        itemService.modify(itemId, modifyRequest);
+    }
+
 }
