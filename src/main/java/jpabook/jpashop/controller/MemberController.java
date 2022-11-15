@@ -33,7 +33,7 @@ public class MemberController
 
     }
 
-    @GetMapping("/members")
+    @GetMapping("")
     public ResponseEntity<List<MembersResponse>> list()
     {
         return ResponseEntity.ok(memberService.findMembers());
