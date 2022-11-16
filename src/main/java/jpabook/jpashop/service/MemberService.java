@@ -59,4 +59,12 @@ public class MemberService
     {
         return memberRepository.findOne(memberId);
     }
+
+    @Transactional
+    public void update(Long id, String name)
+    {
+        //mason 테스트코드 작성
+        Member member = memberRepository.findOne(id);
+        member.changeName(name);
+    }
 }

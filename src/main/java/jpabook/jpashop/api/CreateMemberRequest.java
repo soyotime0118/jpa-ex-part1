@@ -7,9 +7,9 @@ import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
-public class MemberForm
+public class CreateMemberRequest
 {
-    @NotEmpty
+    @NotEmpty(message = "이름은 필수값 입니다")
     private String name;
     private String city;
     private String street;

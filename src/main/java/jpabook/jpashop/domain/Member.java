@@ -60,4 +60,9 @@ public class Member
     {
         return Objects.hash(getId());
     }
+
+    public void changeName(String name)
+    {
+        this.name = name;
+    }
 }
