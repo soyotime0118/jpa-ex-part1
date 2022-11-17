@@ -38,7 +38,16 @@ public class OrderRepositoryImpl implements OrderRepository
     {
         return entityManager.createQuery("select o from Order o " +
                 " left join fetch o.member m " +
-                " join fetch o.delivery d",Order.class).getResultList();
+                " join fetch o.delivery d", Order.class).getResultList();
+    }
+
+    @Override
+    public List<OrderSimpleQueryDto> findOrderDtos()
+    {
+        return entityManager.createQuery("select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id,m.name,o.orderDate,o.status, d.address) from Order o " +
+                        " join o.member m " +
+                        " join o.delivery d", OrderSimpleQueryDto.class)
+                .getResultList();
     }
 
 }
