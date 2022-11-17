@@ -73,8 +73,10 @@ public class OrderApiController
         public SimpleOrderDto(Order order)
         {
             orderId = order.getId();
+            // Lazy 로드로 쿼리 호출
             name = order.getMember().getName();
             orderDate = order.getOrderDate();
+            // Lazy 로드로 쿼리 호출
             address = order.getDelivery().getAddress();
         }
     }
