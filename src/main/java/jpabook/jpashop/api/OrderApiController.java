@@ -48,6 +48,10 @@ public class OrderApiController
         return orderRepository.findAll(new OrderSearch());
     }
 
+    /**
+     * @deprecated v1보다는 좋아졌지만, 객체그래프 탐색시 N+1 쿼리 발생
+     */
+    @Deprecated
     @GetMapping("/api/v2/simple-orders")
     public List<SimpleOrderDto> ordersV2()
     {
@@ -56,6 +60,9 @@ public class OrderApiController
                 .collect(Collectors.toList());
     }
 
+    /**
+     * jpql의 join fetch 로 N+1은 제거, 하지만 조회쿼리에서 불필요한 컬럼이 남아있다.
+     */
     @GetMapping("/api/v3/simple-orders")
     public List<SimpleOrderDto> ordersV3()
     {
@@ -64,6 +71,9 @@ public class OrderApiController
                 .collect(Collectors.toList());
     }
 
+    /**
+     * V3의 불필요한 컬럼을 제거한다. 이 경우 반환하는 DTO가 Repository의 의존성에 추가된다
+     */
     @GetMapping("/api/v4/simple-orders")
     public List<OrderSimpleQueryDto> ordersV4()
     {
