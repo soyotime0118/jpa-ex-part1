@@ -33,4 +33,12 @@ public class OrderRepositoryImpl implements OrderRepository
                 .getResultList();
     }
 
+    @Override
+    public List<Order> findAllWithMemberDelivery(OrderSearch orderSearch)
+    {
+        return entityManager.createQuery("select o from Order o " +
+                " left join fetch o.member m " +
+                " join fetch o.delivery d",Order.class).getResultList();
+    }
+
 }

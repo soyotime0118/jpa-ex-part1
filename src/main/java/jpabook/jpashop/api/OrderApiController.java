@@ -5,8 +5,6 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
-import jpabook.jpashop.service.ItemService;
-import jpabook.jpashop.service.MemberService;
 import jpabook.jpashop.service.OrderService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +25,6 @@ public class OrderApiController
 {
 
     private final OrderService orderService;
-    private final MemberService memberService;
-    private final ItemService itemService;
 
     private final OrderRepository orderRepository;
 
@@ -52,9 +48,17 @@ public class OrderApiController
     }
 
     @GetMapping("/api/v2/simple-orders")
-    public List<SimpleOrderDto> orders()
+    public List<SimpleOrderDto> ordersV2()
     {
         return orderRepository.findAll(new OrderSearch())
+                .stream().map(SimpleOrderDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> ordersV3()
+    {
+        return orderRepository.findAllWithMemberDelivery(new OrderSearch())
                 .stream().map(SimpleOrderDto::new)
                 .collect(Collectors.toList());
     }
@@ -75,6 +79,7 @@ public class OrderApiController
             orderId = order.getId();
             // Lazy 로드로 쿼리 호출
             name = order.getMember().getName();
+            orderStatus = order.getStatus();
             orderDate = order.getOrderDate();
             // Lazy 로드로 쿼리 호출
             address = order.getDelivery().getAddress();
