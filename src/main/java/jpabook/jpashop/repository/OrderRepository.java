@@ -15,4 +15,7 @@ public interface OrderRepository
     List<Order> findAllWithMemberDelivery(OrderSearch orderSearch);
 
     List<OrderSimpleQueryDto> findOrderDtos();
+
+    List<Order> findAllWithItem();
+
 }

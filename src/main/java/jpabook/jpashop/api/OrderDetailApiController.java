@@ -80,4 +80,20 @@ public class OrderDetailApiController
                 .stream().map(OrderDto::new)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/api/v3/orders")
+    public List<OrderDto> ordersV3()
+    {
+        return orderRepository.findAllWithItem().stream()
+                .map(OrderDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/v3.1/orders")
+    public List<OrderDto> ordersV3_1()
+    {
+        return orderRepository.findAllWithMemberDelivery(new OrderSearch()).stream()
+                .map(OrderDto::new)
+                .collect(Collectors.toList());
+    }
 }
